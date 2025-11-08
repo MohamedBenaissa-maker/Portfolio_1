@@ -1,0 +1,75 @@
+.web3d-section {
+  min-height: 100vh;
+  padding: 4rem 0;
+  background: var(--bg-color);
+  position: relative;
+  z-index: 1;
+}
+
+.web3d-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 2rem;
+}
+
+.web3d-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  transition: all 0.3s ease;
+}
+
+.web3d-canvas-container {
+  width: 100%;
+  height: 400px;
+  background: #000;
+  position: relative;
+}
+
+.web3d-content {
+  padding: 1.5rem;
+}
+
+.web3d-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.web3d-content p {
+  color: var(--text-light);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.web3d-link {
+  display: inline-block;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.web3d-link:hover {
+  color: var(--secondary-color);
+  transform: translateX(5px);
+}
+
+.no-projects {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-light);
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .web3d-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .web3d-canvas-container {
+    height: 300px;
+  }
+}
+

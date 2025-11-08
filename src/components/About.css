@@ -1,0 +1,199 @@
+.about-section {
+  min-height: 100vh;
+  padding: 4rem 0;
+  background: var(--gradient-subtle);
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.profile-image-container {
+  position: sticky;
+  top: 100px;
+}
+
+.profile-image-placeholder {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  padding: 5px;
+  background: var(--bg-color);
+}
+
+.profile-image-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+  background-size: 200% 200%;
+  z-index: 0;
+  animation: borderRotate 3s linear infinite;
+}
+
+@keyframes borderRotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.profile-image-placeholder img {
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+  object-fit: cover;
+  background: transparent;
+}
+
+.profile-image-placeholder span {
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-text h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+}
+
+.contact-info {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--bg-light);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.contact-info p {
+  margin: 0.5rem 0;
+  color: var(--text-light);
+}
+
+.contact-info a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+.profile-description,
+.education,
+.experience {
+  margin-bottom: 2.5rem;
+}
+
+.profile-description h2,
+.education h2,
+.experience h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.profile-description p {
+  color: var(--text-light);
+  line-height: 1.8;
+}
+
+.education-item,
+.experience-item {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--primary-color);
+}
+
+.education-item h3,
+.experience-item h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.education-item p,
+.experience-item .period {
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.experience-item .company {
+  font-style: italic;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+.experience-item ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.experience-item ul li {
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  color: var(--text-light);
+}
+
+.experience-item ul li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+}
+
+@media (max-width: 968px) {
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .profile-image-container {
+    position: relative;
+    top: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .profile-image-placeholder {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .about-text h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+}
+
