@@ -1,97 +1,83 @@
-import { useState, useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, Environment } from '@react-three/drei'
-import './Web3D.css'
+import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { OrbitControls, Environment } from "@react-three/drei";
+import "./Web3D.css";
 
-const Box3D = ({ color = '#697184' }) => {
-  const meshRef = useRef()
-  
+// === Individual 3D Models ===
+const Box3D = ({ color }) => {
+  const meshRef = useRef();
   useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.elapsedTime * 0.5
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.3
-    }
-  })
-  
+    meshRef.current.rotation.x = state.clock.elapsedTime * 0.5;
+    meshRef.current.rotation.y = state.clock.elapsedTime * 0.3;
+  });
   return (
-    <mesh ref={meshRef} position={[0, 0, 0]}>
+    <mesh ref={meshRef}>
       <boxGeometry args={[2, 2, 2]} />
       <meshStandardMaterial color={color} metalness={0.8} roughness={0.2} />
     </mesh>
-  )
-}
+  );
+};
 
-const Sphere3D = ({ color = '#697184' }) => {
-  const meshRef = useRef()
-  
+const Sphere3D = ({ color }) => {
+  const meshRef = useRef();
   useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.elapsedTime * 0.3
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.5
-    }
-  })
-  
+    meshRef.current.rotation.x = state.clock.elapsedTime * 0.3;
+    meshRef.current.rotation.y = state.clock.elapsedTime * 0.5;
+  });
   return (
-    <mesh ref={meshRef} position={[0, 0, 0]}>
+    <mesh ref={meshRef}>
       <sphereGeometry args={[1, 32, 32]} />
       <meshStandardMaterial color={color} metalness={0.9} roughness={0.1} />
     </mesh>
-  )
-}
+  );
+};
 
-const Torus3D = ({ color = '#697184' }) => {
-  const meshRef = useRef()
-  
+const Torus3D = ({ color }) => {
+  const meshRef = useRef();
   useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.elapsedTime * 0.4
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.6
-      meshRef.current.rotation.z = state.clock.elapsedTime * 0.2
-    }
-  })
-  
+    meshRef.current.rotation.x = state.clock.elapsedTime * 0.4;
+    meshRef.current.rotation.y = state.clock.elapsedTime * 0.6;
+    meshRef.current.rotation.z = state.clock.elapsedTime * 0.2;
+  });
   return (
-    <mesh ref={meshRef} position={[0, 0, 0]}>
+    <mesh ref={meshRef}>
       <torusGeometry args={[1, 0.4, 16, 100]} />
       <meshStandardMaterial color={color} metalness={0.7} roughness={0.3} />
     </mesh>
-  )
-}
+  );
+};
 
-const Octahedron3D = ({ color = '#697184' }) => {
-  const meshRef = useRef()
-  
+const Octahedron3D = ({ color }) => {
+  const meshRef = useRef();
   useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.elapsedTime * 0.5
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.7
-    }
-  })
-  
+    meshRef.current.rotation.x = state.clock.elapsedTime * 0.5;
+    meshRef.current.rotation.y = state.clock.elapsedTime * 0.7;
+  });
   return (
-    <mesh ref={meshRef} position={[0, 0, 0]}>
+    <mesh ref={meshRef}>
       <octahedronGeometry args={[1.5, 0]} />
-      <meshStandardMaterial color={color} metalness={0.8} roughness={0.2} wireframe={false} />
+      <meshStandardMaterial color={color} metalness={0.8} roughness={0.2} />
     </mesh>
-  )
-}
+  );
+};
 
+// === Scene Loader ===
 const Scene3D = ({ project }) => {
   const getModel = () => {
     switch (project.modelType) {
-      case 'box':
-        return <Box3D color={project.color || '#697184'} />
-      case 'sphere':
-        return <Sphere3D color={project.color || '#697184'} />
-      case 'torus':
-        return <Torus3D color={project.color || '#697184'} />
-      case 'octahedron':
-        return <Octahedron3D color={project.color || '#697184'} />
+      case "box":
+        return <Box3D color={project.color} />;
+      case "sphere":
+        return <Sphere3D color={project.color} />;
+      case "torus":
+        return <Torus3D color={project.color} />;
+      case "octahedron":
+        return <Octahedron3D color={project.color} />;
       default:
-        return <Box3D color={project.color || '#697184'} />
+        return <Box3D color={project.color} />;
     }
-  }
+  };
 
   return (
     <Canvas camera={{ position: [0, 0, 5], fov: 50 }} gl={{ antialias: true }}>
@@ -100,125 +86,252 @@ const Scene3D = ({ project }) => {
       <pointLight position={[-10, -10, -10]} intensity={0.5} color="#697184" />
       <directionalLight position={[0, 5, 5]} intensity={0.8} />
       {getModel()}
-      <OrbitControls 
-        enableZoom={true} 
-        enablePan={true} 
-        enableRotate={true}
+      <OrbitControls
+        enableZoom
+        enablePan
+        enableRotate
         minDistance={3}
         maxDistance={10}
-        autoRotate={false}
       />
       <Environment preset="sunset" />
     </Canvas>
-  )
-}
+  );
+};
 
+// === Project Modal Component ===
+const ProjectModal = ({ project, isOpen, onClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <motion.div
+      className="modal-overlay"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
+      <motion.div
+        className="modal-content"
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.8, opacity: 0 }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="modal-close" onClick={onClose}>
+          ×
+        </button>
+
+        <div className="modal-header">
+          <h2>{project.title}</h2>
+          <div className="project-tools">
+            {project.tools &&
+              project.tools.map((tool, index) => (
+                <span key={index} className="tech-tag">
+                  {tool}
+                </span>
+              ))}
+          </div>
+        </div>
+
+        <div className="modal-body">
+          <div className="modal-image">
+            {project.image ? (
+              <img src={project.image} alt={project.title} />
+            ) : (
+              <div className="image-placeholder">
+                <Scene3D project={project} />
+              </div>
+            )}
+          </div>
+
+          <div className="modal-details">
+            <div className="project-description">
+              <h3>Description</h3>
+              <p>{project.description}</p>
+            </div>
+
+            <div className="project-links">
+              {project.rapport && (
+                <a
+                  href={project.rapport}
+                  className="download-btn-primary"
+                  download
+                >
+                  Download Project Report (PDF)
+                </a>
+              )}
+              {project.downloadLink && (
+                <a
+                  href={project.downloadLink}
+                  className="download-btn-primary"
+                  download
+                >
+                  Download Project Files
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+// === Main Web3D Component ===
 const Web3D = ({ darkMode }) => {
-  const [projects3D, setProjects3D] = useState([])
+  const [projects3D, setProjects3D] = useState([]);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
+  // 🔹 Load projects from JSON file
   useEffect(() => {
-    const savedProjects = localStorage.getItem('portfolio3DProjects')
-    if (savedProjects) {
-      setProjects3D(JSON.parse(savedProjects))
-    }
-  }, [])
+    fetch("/data/projects3D.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setProjects3D(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error loading 3D projects:", err);
+        // Fallback data
+        setProjects3D([
+          {
+            id: 1,
+            title: "Simple Table & Chairs",
+            description:
+              "A 3D model of a simple table with chairs created in Blender, featuring realistic wood textures and proper proportions.",
+            modelType: "box",
+            color: "#8B4513",
+            image: "/images/table-chairs.jpg",
+            tools: [
+              "Blender",
+              "3D Modeling",
+              "UV Mapping",
+              "Texturing",
+              "Lighting",
+            ],
+            rapport: "/documents/table-chairs-report.pdf",
+            downloadLink: "/downloads/table-chairs.blend",
+          },
+          {
+            id: 2,
+            title: "Domino Effect Animation",
+            description:
+              "A dynamic domino effect simulation created in Blender, showing sequential falling dominoes with physics simulation.",
+            modelType: "sphere",
+            color: "#000000",
+            image: "/images/domino-effect.jpg",
+            tools: [
+              "Blender",
+              "Physics Simulation",
+              "Rigid Body",
+              "Animation",
+              "Keyframing",
+              "Rendering",
+            ],
+            rapport: "/documents/domino-effect-report.pdf",
+            downloadLink: "/downloads/domino-effect.blend",
+          },
+        ]);
+        setLoading(false);
+      });
+  }, []);
 
-  // Listen for storage changes (when admin adds new project)
+  // Prevent body scroll when modal is open
   useEffect(() => {
-    const handleStorageChange = () => {
-      const savedProjects = localStorage.getItem('portfolio3DProjects')
-      if (savedProjects) {
-        setProjects3D(JSON.parse(savedProjects))
-      }
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
     }
-
-    window.addEventListener('storage', handleStorageChange)
-    const interval = setInterval(handleStorageChange, 1000) // Check every second
 
     return () => {
-      window.removeEventListener('storage', handleStorageChange)
-      clearInterval(interval)
-    }
-  }, [])
+      document.body.style.overflow = "unset";
+    };
+  }, [isModalOpen]);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  }
+  const handleProjectClick = (project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
 
-  const itemVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { 
-      opacity: 1, 
-      scale: 1,
-      transition: {
-        duration: 0.5
-      }
-    }
-  }
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
 
   return (
     <section id="web3d" className="web3d-section">
       <div className="container">
-        <motion.h2
-          className="section-title"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          Web 3D Projects
-        </motion.h2>
-        
-        {projects3D.length === 0 ? (
-          <motion.div
-            className="no-projects"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
+        <h2 className="section-title">Web 3D Projects</h2>
+
+        {loading ? (
+          <div className="no-projects">
+            <p>Loading projects...</p>
+          </div>
+        ) : projects3D.length === 0 ? (
+          <div className="no-projects">
             <p>No 3D projects available yet. Check back soon!</p>
-          </motion.div>
+          </div>
         ) : (
-          <motion.div
-            className="web3d-grid"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
+          <div className="web3d-grid">
             {projects3D.map((project) => (
-              <motion.div
+              <div
                 key={project.id}
                 className="web3d-card"
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -5 }}
+                onClick={() => handleProjectClick(project)}
               >
-                <div className="web3d-canvas-container">
-                  <Scene3D project={project} />
+                <div className="web3d-image-container">
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="web3d-image"
+                    />
+                  ) : (
+                    <div className="web3d-canvas-container">
+                      <Scene3D project={project} />
+                    </div>
+                  )}
+                  <div className="project-overlay">
+                    <span className="project-link-overlay">View Details →</span>
+                  </div>
                 </div>
+
                 <div className="web3d-content">
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
-                  {project.link && (
-                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="web3d-link">
-                      View Details →
-                    </a>
-                  )}
+                  <div className="project-tech">
+                    {project.tools &&
+                      project.tools.slice(0, 4).map((tool, index) => (
+                        <span key={index} className="tech-tag">
+                          {tool}
+                        </span>
+                      ))}
+                    {project.tools && project.tools.length > 4 && (
+                      <span className="tech-tag">
+                        +{project.tools.length - 4}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
+        )}
+
+        {/* Project Modal */}
+        {selectedProject && (
+          <ProjectModal
+            project={selectedProject}
+            isOpen={isModalOpen}
+            onClose={closeModal}
+          />
         )}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Web3D
-
+export default Web3D;

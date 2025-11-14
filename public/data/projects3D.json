@@ -1,0 +1,31 @@
+[
+  {
+    "id": 1,
+    "title": "Simple Table & Chairs",
+    "description": "A 3D model of a simple table with chairs created in Blender, featuring realistic wood textures and proper proportions.",
+    "modelType": "tableChairs",
+    "color": "#8B4513",
+    "image": "../../src/images/Table .png",
+    "rapport": "",
+    "tools": ["Blender", "3D Modeling", "UV Mapping", "Texturing", "Lighting"],
+    "downloadLink": "../../src/images/Table And Chairs.FBX"
+  },
+  {
+    "id": 2,
+    "title": "Domino Effect Animation",
+    "description": "A dynamic domino effect simulation created in Blender, showing sequential falling dominoes with physics simulation.",
+    "modelType": "dominoEffect",
+    "color": "#000000",
+    "image": "../../src/images/ChatGPT Image 14 nov. 2025, 14_24_06.png",
+    "rapport": "../../src/images/Domino_Effect.pdf",
+    "tools": [
+      "Blender",
+      "Physics Simulation",
+      "Rigid Body",
+      "Animation",
+      "Keyframing",
+      "Rendering"
+    ],
+    "downloadLink": "../../src/images/lmoh.blend"
+  }
+]
