@@ -16,7 +16,7 @@
     "description": "A dynamic domino effect simulation created in Blender, showing sequential falling dominoes with physics simulation.",
     "modelType": "dominoEffect",
     "color": "#000000",
-    "image": "../../src/images/ChatGPT Image 14 nov. 2025, 14_24_06.png",
+    "image": "../../src/images/ChatGPT_Image_14_nov_2025.png",
     "rapport": "../../src/images/Domino_Effect.pdf",
     "tools": [
       "Blender",
