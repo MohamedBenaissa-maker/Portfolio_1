@@ -4,23 +4,23 @@
     "title": "Codo File",
     "description": "Web-based code editor with support for multiple languages (Python, JavaScript, Dart). Integrated Image-to-Text and Voice-to-Text features for accessibility.",
     "tech": ["React", "Node.js", "Judge0 API"],
-    "image": "../../src/images/Voice2TextPage.PNG",
+    "image": "/images/Voice2TextPage.PNG",
     "link": ""
   },
   {
     "id": 2,
-    "title": "A Movie Finding App ",
-    "description": "Built with Expo, TypeScript, and Tailwind CSS, this app fetches movies and creates a popularity algorithm using Appwrite. It provides users with a seamless browsing experience, ranking movies based on various engagement metrics. The app leverages modern UI/UX principles for a responsive and visually appealing interface, ensuring real-world scalability and performance",
+    "title": "A Movie Finding App",
+    "description": "Built with Expo, TypeScript, and Tailwind CSS, this app fetches movies and creates a popularity algorithm using Appwrite. It provides users with a seamless browsing experience, ranking movies based on various engagement metrics. The app leverages modern UI/UX principles for a responsive and visually appealing interface, ensuring real-world scalability and performance.",
     "tech": ["Expo", "TypeScript", "Tailwind", "React Native"],
-    "image": "../../src/images/Screenshot 2025-11-08 204941.png",
+    "image": "/images/Screenshot 2025-11-08 204941.png",
     "link": "https://github.com/MohamedBenaissa-maker/Movies_App"
   },
   {
     "id": 3,
     "title": "Real Estate App",
-    "description": "full-stack Real Estate application with React Native, featuring Google authentication, dynamic property listings, and user profiles. Designed with modern tools like Expo SDK 52, Appwrite, Tailwind CSS, and TypeScript ",
-    "tech": ["React Native", "Appwrite", " Tailwind", "TypeScript "],
-    "image": "../../src/images/Screenshot 2025-11-08 204242.png",
+    "description": "Full-stack Real Estate application with React Native, featuring Google authentication, dynamic property listings, and user profiles. Designed with modern tools like Expo SDK 52, Appwrite, Tailwind CSS, and TypeScript.",
+    "tech": ["React Native", "Appwrite", "Tailwind", "TypeScript"],
+    "image": "/images/Screenshot 2025-11-08 204242.png",
     "link": "https://github.com/MohamedBenaissa-maker/Real_Estate_App"
   }
 ]

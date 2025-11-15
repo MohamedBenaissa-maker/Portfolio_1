@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import "./About.css";
-import profilePic from "../images/ess.jpg";
+import profilePic from "../../public/images/ess.jpg";
 
 const About = ({ darkMode }) => {
   const [profileImage, setProfileImage] = useState("");
